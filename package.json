@@ -1,0 +1,64 @@
+{
+  "name": "securitydemo",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/cds-mtxs": "^1.14.2",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "auth": {
+        "[production]": {
+          "strategy": "JWT"
+        },
+        "[development]": {
+          "strategy": "mock",
+          "users": {
+            "janmejayaswain@gmail.com": {
+              "password": "happy@123",
+              "ID": "riskviewer",
+              "userAttributes": {
+                "email": "janmejayaswain@gmail.com"
+              },
+              "roles": [
+                "RiskViewer"
+              ]
+            },
+            "janmejaya@gmail.com": {
+              "password": "happy@1234",
+              "ID": "riskmanager",
+              "userAttributes": {
+                "email": "janmejaya@gmail.com"
+              },
+              "roles": [
+                "RiskManager"
+              ]
+            }
+          }
+        }
+      },
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      }
+    }
+  }
+}
